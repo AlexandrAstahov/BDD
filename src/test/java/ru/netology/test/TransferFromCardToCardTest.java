@@ -26,8 +26,8 @@ public class TransferFromCardToCardTest {
 
     @Test
     public void shouldTransferMoneyFromFirstToSecond() {
-        int amount = 5000;
         var cardBalance = new CardBalance();
+        int amount = cardBalance.getFirstCardBalance() / 2;
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
         var transactionPage = CardBalance.pushCardButton(1);
@@ -41,8 +41,8 @@ public class TransferFromCardToCardTest {
 
     @Test
     public void shouldTransferMoneyFromSecondToFirst() {
-        int amount = 20000;
         var cardBalance = new CardBalance();
+        int amount = cardBalance.getSecondCardBalance() / 2;
         var firstCardBalanceStart = cardBalance.getFirstCardBalance();
         var secondCardBalanceStart = cardBalance.getSecondCardBalance();
         var transactionPage = CardBalance.pushCardButton(0);
@@ -56,24 +56,32 @@ public class TransferFromCardToCardTest {
 
     @Test
     public void shouldTransferFromSecondToSecondCard() {
-        int amount = 5000;
         var cardBalance = new CardBalance();
-        var firstCardBalanceStart = cardBalance.getFirstCardBalance();
-        var secondCardBalanceStart = cardBalance.getSecondCardBalance();
+        int amount = cardBalance.getSecondCardBalance() / 2;
         var transactionPage = pushCardButton(1);
         transactionPage.transferMoney(amount, String.valueOf(getSecondCardNumber()));
-        //должна выскочить ошибка
-        // transactionPage.invalidCard();
+        transactionPage.sameCard();
+
     }
 
     @Test
     public void TransferFromANonExistentCard() {
-        int amount = 5000;
         var cardBalance = new CardBalance();
-        var firstCardBalanceStart = cardBalance.getFirstCardBalance();
-        var secondCardBalanceStart = cardBalance.getSecondCardBalance();
-        var transactionPage = pushCardButton(1);
+        int amount = cardBalance.getFirstCardBalance() / 2;
+        var transactionPage = pushCardButton(0);
         transactionPage.transferMoney(amount, String.valueOf(getThirdCardNumber()));
         transactionPage.invalidCard();
+    }
+
+    @Test
+    public void TransferFromFirstToSecondAboveTheLimit() {
+        var cardBalance = new CardBalance();
+        int amount = cardBalance.getFirstCardBalance() * 2;
+        var firstCardBalanceStart = cardBalance.getFirstCardBalance();
+        var secondCardBalanceStart = cardBalance.getSecondCardBalance();
+        var transactionPage = CardBalance.pushCardButton(1);
+        transactionPage.transferMoney(amount, String.valueOf(getFirstCardNumber()));
+        transactionPage.errorLimit();
+
     }
 }

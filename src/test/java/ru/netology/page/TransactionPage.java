@@ -21,6 +21,10 @@ public class TransactionPage {
         $(".notification__content").should(Condition.exactText("Ошибка"));
     }
 
+    public void sameCard() {
+        $(".notification__content").should(Condition.exactText("Ошибка"));
+    }
+
     public void invalidCard() {
         $(".notification__content").should(Condition.text("Ошибка! Произошла ошибка"));
     }

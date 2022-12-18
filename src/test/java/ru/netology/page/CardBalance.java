@@ -10,10 +10,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class CardBalance {
     private SelenideElement heading = $("[data-test-id=dashboard]");
-   // private static SelenideElement firstCardButton = $("[data-test-id=\"action-deposit\"]");
-   // private static SelenideElement secondCardButton = $("data-test-id=\"action-deposit\"");
 
-    // к сожалению, разработчики не дали нам удобного селектора, поэтому так
     private ElementsCollection cards = $$(".list__item div");
     private final String balanceStart = "баланс: ";
     private final String balanceFinish = " р.";

@@ -38,6 +38,7 @@ public class DataHelper {
     public static CardsInfo getSecondCardNumber() {
         return new CardsInfo("5559 0000 0000 0002");
     }
+
     public static CardsInfo getThirdCardNumber() {
         return new CardsInfo("2222 1111 1234 1234");
     }
