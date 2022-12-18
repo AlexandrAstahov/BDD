@@ -77,8 +77,6 @@ public class TransferFromCardToCardTest {
     public void TransferFromFirstToSecondAboveTheLimit() {
         var cardBalance = new CardBalance();
         int amount = cardBalance.getFirstCardBalance() * 2;
-        var firstCardBalanceStart = cardBalance.getFirstCardBalance();
-        var secondCardBalanceStart = cardBalance.getSecondCardBalance();
         var transactionPage = CardBalance.pushCardButton(1);
         transactionPage.transferMoney(amount, String.valueOf(getFirstCardNumber()));
         transactionPage.errorLimit();
