@@ -53,6 +53,14 @@ public class TransferFromCardToCardTest {
         assertEquals(firstCardBalanceFinish, firstCardBalanceStart + amount);
         assertEquals(secondCardBalanceFinish, secondCardBalanceStart - amount);
     }
+    @Test
+    public void TransferFromANonExistentCard() {
+        var cardBalance = new CardBalance();
+        int amount = cardBalance.getFirstCardBalance() / 2;
+        var transactionPage = pushCardButton(0);
+        transactionPage.transferMoney(amount, String.valueOf(getThirdCardNumber()));
+        transactionPage.invalidCard();
+    }
 
     @Test
     public void shouldTransferFromSecondToSecondCard() {
@@ -65,18 +73,9 @@ public class TransferFromCardToCardTest {
     }
 
     @Test
-    public void TransferFromANonExistentCard() {
-        var cardBalance = new CardBalance();
-        int amount = cardBalance.getFirstCardBalance() / 2;
-        var transactionPage = pushCardButton(0);
-        transactionPage.transferMoney(amount, String.valueOf(getThirdCardNumber()));
-        transactionPage.invalidCard();
-    }
-
-    @Test
     public void TransferFromFirstToSecondAboveTheLimit() {
         var cardBalance = new CardBalance();
-        int amount = cardBalance.getFirstCardBalance() * 2;
+        int amount = cardBalance.getFirstCardBalance() + 200;
         var transactionPage = CardBalance.pushCardButton(1);
         transactionPage.transferMoney(amount, String.valueOf(getFirstCardNumber()));
         transactionPage.errorLimit();
